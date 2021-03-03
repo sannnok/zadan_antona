@@ -1,0 +1,12 @@
+<div class="meshok">
+    <div class="organ">
+        <input type="text" name="organ" id="organ">
+        <button (click)="vpihivaem()">Vpihnuti</button>
+    </div>
+    <div class="mestoOtkudaRojdaetseaRebionokRebionka">
+        <ng-template ngFor let-child [ngForOf]="deti">
+            <div class="organ"></div>
+        </ng-template>
+        <!-- <app-organ *ngIf="vpihnuli"></app-organ> -->
+    </div>
+</div>

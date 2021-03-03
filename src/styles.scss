@@ -1,1 +1,74 @@
-/* You can add global styles to this file, and also import other style files */
+html, body, app-root, content {
+    height: 100%;
+}
+
+body, app-root, .content, vnutri-zinenko, .meshok {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .toolbar {
+        flex-grow: 1;
+    }
+
+    .content {
+        flex-grow: 100;
+
+        app-anton {
+            margin-top: 20px;
+            flex-grow: 100;
+        }
+
+        svg {
+            flex-grow: 1;
+        }
+    }
+}
+
+app-organ {
+    flex: 1 1 0;
+}
+
+// ==== Hide Input Arrows ====
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+// ===========================
+button {
+    font-size: 14px;
+    cursor: pointer;
+}
+body {
+    position: relative;
+}
+
+body::after {
+    content: "";
+    background-image: url('./assets/neho4u!.jpg');
+    opacity: 0.1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    -webkit-mask-image: linear-gradient(
+183deg
+, black, transparent);
+    background-repeat: no-repeat;
+    background-blend-mode: normal;
+    background-size: cover;
+}
+
+.Path_40 {
+    fill: rgb(105 103 103 / 16%);
+}

@@ -1,0 +1,22 @@
+.vnutri-zinenko {
+    height: 100%;
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 50px;
+    position: relative;
+
+    p {
+        color: rgb(28, 28, 189);
+        font-family: fantasy;
+    }
+}
+
+
+
+.scrollable {
+    width: 95vw;
+    height: 40vw;
+    overflow: auto;
+}

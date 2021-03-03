@@ -1,0 +1,21 @@
+<div class="meshok"
+    [class.right]="hasParent && (isFirst && !isLast)"
+    [class.left]="hasParent && (isLast && !isFirst)"
+    [class.middle]="hasParent && (!isFirst && !isLast)"
+>
+
+    <div
+        class="organ"
+        [class.top]="hasParent"
+        [class.bottom]="deti.length"
+    >
+        <input type="text" name="organ" [(ngModel)]="imeaOrgana">
+        <div class="zachatie">
+            <input #input type="number" name="kolvo" id="kolvo" [(ngModel)]="kolvo" (keydown.enter)="vpihivaem('input')">
+            <button (click)="vpihivaem()">Vpihnut'</button>
+        </div>
+    </div>
+    <div class="mestoOtkudaRojdaetseaRebionokRebionka">
+        <ng-template #rojaem_v_priamom_efire></ng-template>
+    </div>
+</div>
