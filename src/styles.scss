@@ -48,13 +48,13 @@ button {
     cursor: pointer;
 }
 body {
-    position: relative;
+    // position: relative;
 }
 
 body::after {
     content: "";
     background-image: url('./assets/neho4u!.jpg');
-    opacity: 0.1;
+    opacity: 1;
     position: absolute;
     top: 0;
     left: 0;
@@ -66,7 +66,7 @@ body::after {
 , black, transparent);
     background-repeat: no-repeat;
     background-blend-mode: normal;
-    background-size: cover;
+    background-size: 100% 137%;
 }
 
 .Path_40 {
