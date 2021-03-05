@@ -101,6 +101,15 @@ body::after {
         }
     }
 
+    #removeCard {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 18px;
+        width: 14px;
+        padding: 0;
+    }
+
     &.top::before {
         content: "";
         height: 20px;

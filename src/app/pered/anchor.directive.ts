@@ -16,13 +16,19 @@ export class RenderAnchorDirective implements AfterViewInit {
   private el: HTMLElement;
 
   @Input() templateToRender: TemplateRef<any>;
-  @Input() userClick: EventEmitter<Card>;
+  @Input() userActions: {
+    onUserClickedCreateChild: EventEmitter<Card>;
+    onUserClickedRemove: EventEmitter<Card>;
+  } ;
 
   constructor(public vcr: ViewContainerRef) {}
 
   ngAfterViewInit() {
-    this.userClick.subscribe((c: Card) => {
+    this.userActions.onUserClickedCreateChild.subscribe((c: Card) => {
       this.createChild(c);
+    });
+    this.userActions.onUserClickedRemove.subscribe((c: Card) => {
+      this.remove(c);
     });
   }
 
@@ -30,16 +36,27 @@ export class RenderAnchorDirective implements AfterViewInit {
     for (let i = 0; i < context.kolvo; i++) {
       const newChild = new Card(
         context.iteration,
-        context.id,
+        context,
         `Child of ${context.title || context.id}`,
         []
       );
-      this.vcr.createEmbeddedView(this.templateToRender, {
+      const view = this.vcr.createEmbeddedView(this.templateToRender, {
         $implicit: newChild
       });
 
+      newChild.view = view;
+
       context.childs.push(newChild);
     }
+  }
 
+  remove(card: Card) {
+    if (card.parent) {
+      const cardIndex = card.parent.childs.findIndex((c: Card) => c.id === card.id);
+      if (cardIndex + 1) {
+        card.parent.childs.splice(cardIndex, 1);
+        card.view.destroy();
+      }
+    }
   }
 }

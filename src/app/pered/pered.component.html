@@ -1,44 +1,25 @@
-<!-- <ng-template ngFor let-item [ngForOf]="cards">
-  <app-organ2></app-organ2>
-</ng-template> -->
+<ng-container *ngTemplateOutlet="card; context: { $implicit: cards[0] }"></ng-container>
 
-<!-- <ng-template #actions let-actions>
-  <li *ngFor="let item of actions">
-    {{ item.title }}
-    <ul *ngIf="item.children.length > 0">
-      <ng-container
-        *ngTemplateOutlet="card; context: { $implicit: item.children }"
-      ></ng-container>
-    </ul>
-  </li>
-</ng-template> -->
-
-<!-- <ng-template ngFor let-card [ngForOf]="cards"> -->
-    <!-- <dynamic></dynamic> -->
-    <!-- </ng-template> -->
-    
-<ng-container *ngTemplateOutlet="card; context: { $implicit: cards[0], vcr: vcr }"></ng-container>
-
-<ng-template #card let-item let-vcr="vcr">
+<ng-template #card let-item>
     <div class="wrap-container">
         <div class="organ">
-            <!-- <input type="text"  [value]="item | json" /> -->
             <input type="text" name="organ" [(ngModel)]="item.title" />
             <div class="zachatie">
-              <input
-                #input
-                type="number"
-                name="kolvo"
-                id="kolvo"
-                aria-label="Имя сюда"
-                [(ngModel)]="item.kolvo"
-                (keydown.enter)="item.createChild()"
-              />
-              <button (click)="item.createChild()">Create</button>
+                <input
+                  #input
+                  type="number"
+                  name="kolvo"
+                  id="kolvo"
+                  aria-label="Имя сюда"
+                  [(ngModel)]="item.kolvo"
+                  (keydown.enter)="item.createChild()"
+                />
+                <button (click)="item.createChild()">Create</button>
             </div>
+            <button id="removeCard" (click)="item.remove()">X</button>
         </div>
         <div class="mestoOtkudaRojdaetseaRebionok">
-            <ng-template #anchorForChild renderAnchor [templateToRender]="card" [userClick]="item.userClicked"></ng-template>
+            <ng-template #anchorForChild renderAnchor [templateToRender]="card" [userActions]="item.userActions"></ng-template>
         </div>
     </div>
 </ng-template>
