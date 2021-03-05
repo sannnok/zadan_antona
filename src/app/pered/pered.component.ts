@@ -20,7 +20,7 @@ export class PeredComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.vcr);
+    console.log(this.cards);
   }
 
 }

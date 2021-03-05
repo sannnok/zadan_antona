@@ -28,14 +28,18 @@ export class RenderAnchorDirective implements AfterViewInit {
 
   public createChild(context: Card) {
     for (let i = 0; i < context.kolvo; i++) {
+      const newChild = new Card(
+        context.iteration,
+        context.id,
+        `Child of ${context.title || context.id}`,
+        []
+      );
       this.vcr.createEmbeddedView(this.templateToRender, {
-        $implicit: new Card(
-          context.iteration,
-          context.id,
-          `Child of ${context.title || context.id}`,
-          []
-        ),
+        $implicit: newChild
       });
+
+      context.childs.push(newChild);
     }
+
   }
 }
