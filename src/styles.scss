@@ -7,7 +7,7 @@ body, app-root, .content, vnutri-zinenko, .meshok {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 
     .toolbar {
         flex-grow: 1;
@@ -71,4 +71,56 @@ body::after {
 
 .Path_40 {
     fill: rgb(105 103 103 / 16%);
+}
+
+.organ {
+    position: relative;
+    height: 90px;
+    width: 180px;
+    margin: 24px;
+    box-sizing: border-box;
+    border: 3px dashed #69323a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #95835b5e;
+
+    button {
+        padding: 4px;
+    }
+
+    .zachatie {
+        display: flex;
+        gap: 2px;
+    
+        #kolvo {
+            width: 19px;
+            text-align: center;
+            font-size: 14px;
+        }
+    }
+
+    &.top::before {
+        content: "";
+        height: 20px;
+        position: absolute;
+        top: -27px;
+        left: 90px;
+        border: 1px solid #bc9641;
+    }
+
+    &.bottom::after {
+        content: "";
+        height: 20px;
+        position: absolute;
+        bottom: -28px;
+        left: 90px;
+        border: 1px solid #bc9641;
+    }
+}
+
+.mestoOtkudaRojdaetseaRebionokRebionka {
+    display: flex;
+    justify-content: space-between;
 }

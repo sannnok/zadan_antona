@@ -21,7 +21,7 @@ export class OrganComponent implements OnInit, AfterViewInit {
   isMiddle: boolean;
 
   // @Output() childViewContainerRef = new EventEmitter<{f: ComponentFactory<OrganComponent>, vr: ViewContainerRef}>();
-  @ViewChild('rojaem_v_priamom_efire', { read: ViewContainerRef }) mestoRojdeniya: ViewContainerRef;
+  @ViewChild('rojaem_v_priamom_efire', { read: ViewContainerRef }) vcr: ViewContainerRef;
   @ViewChild('input') input: ElementRef;
 
   constructor(
@@ -37,14 +37,14 @@ export class OrganComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.mestoRojdeniya.clear();
+    this.vcr.clear();
     // if (this.deti.length) {
     //   // this.tsup.save(this.mestoRojdeniya);
     //   // this.vpihivaem('init');
     //   for(let i=0; i<this.deti.length; i++) {
     //     // Sozdayom rebenka
     //     let rojdennyi: ComponentRef<OrganComponent> = this.mestoRojdeniya.createComponent(this.componentFactory);
-    //   }  
+    //   }
     // }
   }
 
@@ -59,19 +59,19 @@ export class OrganComponent implements OnInit, AfterViewInit {
 
     for(let i=0; i<(this.kolvo || 1); i++) {
       // Sozdayom rebenka
-      let rojdennyi: ComponentRef<OrganComponent> = this.mestoRojdeniya.createComponent(this.componentFactory);
+      let rojdennyi: ComponentRef<OrganComponent> = this.vcr.createComponent(this.componentFactory);
       // Sohraniaem Ref Componenta
-      this.deti.push({mestoRojdeniyaChild: this.mestoRojdeniya, rojdennyi});
+      this.deti.push({mestoRojdeniyaChild: this.vcr, rojdennyi});
       // if (i === (this.kolvo || 1) - 1) {
       //   // Ubiraem s View dlea testa
-        this.mestoRojdeniya.detach();
+        this.vcr.detach();
       // }
     }
 
     // Vosstanavlivaem View
     // this.tsup.restore(this.deti);
     this.deti.forEach((rebionok, i) => {
-      this.mestoRojdeniya.insert(rebionok.rojdennyi.hostView);
+      this.vcr.insert(rebionok.rojdennyi.hostView);
       rebionok.rojdennyi.instance.hasParent = true;
       rebionok.rojdennyi.instance.isFirst = i === 0;
       rebionok.rojdennyi.instance.isLast = i === this.deti.length - 1;

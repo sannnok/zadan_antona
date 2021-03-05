@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, ComponentRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ComponentRef, ViewRef } from '@angular/core';
 import { OrganComponent } from './organ/organ.component';
 import { TzentrPoliotovAntonaService } from './tzentr-poliotov-antona.service';
 

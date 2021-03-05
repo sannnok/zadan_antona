@@ -14,7 +14,7 @@ export class TzentrPoliotovAntonaService {
   private glavnyiOrgan: OrganComponent;
 
   public save(glavnyiOrgan: OrganComponent) {
-    this.mestoRojdeniya = glavnyiOrgan.mestoRojdeniya;
+    this.mestoRojdeniya = glavnyiOrgan.vcr;
     this.deti = glavnyiOrgan.deti;
     this.glavnyiOrgan = glavnyiOrgan;
   }
@@ -71,7 +71,7 @@ export class TzentrPoliotovAntonaService {
       let temp = [...rojdennyi.instance.deti];
 
       timer(500).subscribe(() => {
-        this.recursiveStep(temp, rojdennyi.instance.componentFactory, rojdennyi.instance.mestoRojdeniya);
+        this.recursiveStep(temp, rojdennyi.instance.componentFactory, rojdennyi.instance.vcr);
       });
     }  
   }
