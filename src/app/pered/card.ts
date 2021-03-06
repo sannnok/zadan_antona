@@ -1,4 +1,4 @@
-import { ViewContainerRef, TemplateRef, ElementRef, EventEmitter, EmbeddedViewRef } from '@angular/core';
+import { TemplateRef, EventEmitter, EmbeddedViewRef } from '@angular/core';
 
 export class Card {
   // Amount of childs to create
@@ -12,21 +12,21 @@ export class Card {
 
   public view: EmbeddedViewRef<Card>;
 
+  public isMainTemplateUsed = true;
+  public isCardViewUsed = true;
+
   constructor(
     public iteration: { i: number },
     public parent?: Card,
     public title?: string,
-    public childs?: any[] | Card[]
+    public childs?: any[] | Card[],
   ) {
     this.id = this.iteration.i++;
   }
 
-  // TODO: Save and rerender saved tree
+  createChild(tmplRefName: 'main' | 'other') {
+    this.isMainTemplateUsed = tmplRefName === 'main';
 
-  renderExisting() {
-  }
-
-  createChild() {
     this.userActions.onUserClickedCreateChild.next(this);
   }
 

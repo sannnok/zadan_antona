@@ -1,25 +1,87 @@
-<ng-container *ngTemplateOutlet="card; context: { $implicit: cards[0] }"></ng-container>
+<ng-container *ngTemplateOutlet="main; context: { $implicit: cards[0] }"></ng-container>
 
-<ng-template #card let-item>
+<ng-template #main let-item>
     <div class="wrap-container">
-        <div class="organ">
-            <input type="text" name="organ" [(ngModel)]="item.title" />
-            <div class="zachatie">
-                <input
-                  #input
-                  type="number"
-                  name="kolvo"
-                  id="kolvo"
-                  aria-label="Имя сюда"
-                  [(ngModel)]="item.kolvo"
-                  (keydown.enter)="item.createChild()"
-                />
-                <button (click)="item.createChild()">Create</button>
-            </div>
-            <button id="removeCard" (click)="item.remove()">X</button>
-        </div>
-        <div class="mestoOtkudaRojdaetseaRebionok">
-            <ng-template #anchorForChild renderAnchor [templateToRender]="card" [userActions]="item.userActions"></ng-template>
-        </div>
+      <ng-container *ngTemplateOutlet="item.isCardViewUsed ? cardTemplate : circleTemplate; context: { $implicit: item }"></ng-container>
+      <div class="mestoOtkudaRojdaetseaRebionok">
+          <ng-template #anchorForChild renderAnchor [templatesToRender]="[main, other]" [userActions]="item.userActions"></ng-template>
+      </div>
     </div>
 </ng-template>
+
+<ng-template #cardTemplate let-item>
+    <div class="organ">
+      <div class="template-trigger">
+        <h4>Use Card view.</h4>
+        <input type="checkbox" [(ngModel)]="item.isCardViewUsed"/>
+      </div>
+      <input type="text" name="organ" [(ngModel)]="item.title" />
+      <div class="zachatie">
+          <input
+            #input
+            type="number"
+            name="kolvo"
+            id="kolvo"
+            aria-label="Имя сюда"
+            [(ngModel)]="item.kolvo"
+            (keydown.enter)="item.createChild()"
+          />
+          <div>
+            <button (click)="item.createChild('main')">Create A</button>
+            <button (click)="item.createChild('other')">Create B</button>
+          </div>
+      </div>
+      <button id="removeCard" (click)="item.remove()" *ngIf="item.id - 1">X</button>
+  </div>
+</ng-template>
+
+<ng-template #circleTemplate let-item>
+  <div class="circle">
+    <div class="template-trigger">
+      <h4>Use Card view.</h4>
+      <input type="checkbox" [(ngModel)]="item.isCardViewUsed"/>
+    </div>
+    <H3>{{ item.title }}</H3>
+    <div>
+      <button (click)="item.createChild('main')">Create A</button>
+      <button (click)="item.createChild('other')">Create B</button>
+    </div>
+  </div>
+</ng-template>
+
+
+<!-- The way to create full another child with ability to create child in another place -->
+<ng-template #other let-item>
+  <div class="wrap-container">
+    <div class="circle">
+      <h4>Прыщь</h4>
+      <div class="template-trigger">
+        <button (click)="item.createChild('main')">Create A</button>
+        <button (click)="item.createChild('other')">Create B</button>
+      </div>
+    </div>
+    <div class="mestoOtkudaRojdaetseaRebionok">
+      <ng-template #anchorForChild renderAnchor [templatesToRender]="[main, other]" [userActions]="item.userActions"></ng-template>
+    </div>
+  </div>
+</ng-template>
+
+<button (click)="save()">SAVE</button>
+
+<!-- TODO: Instantiate Actions(Listeners) -->
+<ng-template #recursivelyDraw let-items>
+  <!-- <textarea name="a" id="a" cols="30" rows="10" [value]="items | json"></textarea> -->
+  <ng-template ngFor let-item [ngForOf]="items">
+    <div class="wrap-container">
+      <ng-container *ngTemplateOutlet="main; context: { $implicit: item }"></ng-container>
+      <div class="mestoOtkudaRojdaetseaRebionok">
+        <ng-container *ngIf="item.childs" >
+          <ng-container *ngTemplateOutlet="recursivelyDraw; context: { $implicit: item.childs }"></ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </ng-template>
+</ng-template>
+
+<h1>SAVED TREE is UNDER</h1>
+<ng-container *ngTemplateOutlet="recursivelyDraw; context: { $implicit: savedTree }"></ng-container>
